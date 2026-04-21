@@ -1,0 +1,14 @@
+[project]
+name = "astock-etf-kanban"
+version = "0.1.0"
+description = "A股ETF轮动看板 - 基于动量策略的ETF轮动分析工具"
+requires-python = ">=3.11"
+dependencies = [
+    "akshare>=1.14.0",
+    "numpy>=1.26.0",
+    "pandas>=2.1.0",
+    "matplotlib>=3.8.0",
+]
+
+[tool.uv]
+package = false

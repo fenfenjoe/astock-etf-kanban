@@ -1,0 +1,23 @@
+# 虚拟环境
+.venv/
+
+# Python 缓存
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# 构建产物
+dist/
+build/
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+
+# 数据 / 日志
+*.log
+*.csv
+*.xlsx
