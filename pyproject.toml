@@ -8,6 +8,7 @@ dependencies = [
     "numpy>=1.26.0",
     "pandas>=2.1.0",
     "matplotlib>=3.8.0",
+    "tickflow>=0.1.19",
 ]
 
 [tool.uv]

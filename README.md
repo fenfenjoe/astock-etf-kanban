@@ -1,25 +1,26 @@
 # A股ETF轮动看板
 
-基于动量策略的 A 股 ETF 轮动分析工具，数据源使用 [AKShare](https://akshare.akfamily.xyz/)。
+基于动量策略的 A 股 ETF 轮动分析工具，数据源使用 [TickFlow](https://tickflow.org/)。
 
-> 为什么选这 4 只 ETF 轮动，可看：https://www.joinquant.com/post/42673
+> 为什么选这 4 只 ETF 轮动，可看：<https://www.joinquant.com/post/42673>
 
----
+***
 
 ## 项目结构
 
 ```
 astock-etf-kanban/
 ├── config.py                 # 共用配置：ETF 池、名称映射、算法参数
-├── etf_utils.py              # 共用工具：AKShare 数据获取函数
+├── etf_utils.py              # 共用工具：TickFlow 数据获取函数
 ├── etf_score.py              # 脚本1：计算当前动量评分，输出今日持仓建议
-├── etf_momentum_chart.py     # 脚本2：动量分值折线图 + 涨跌幅走势分析
-├── etf_position_strategy.py  # 脚本3：持仓策略可视化（红/紫色线段）
+├── etf_price_table.py        # 脚本2：ETF 收盘价表格展示
+├── etf_momentum_chart.py     # 脚本3：动量分值折线图 + 涨跌幅走势分析
+├── etf_position_strategy.py   # 脚本4：持仓策略可视化（红/紫色线段）
 ├── pyproject.toml            # 项目依赖声明（uv 管理）
 └── .python-version           # Python 版本锁定（3.11）
 ```
 
----
+***
 
 ## 环境准备
 
@@ -33,7 +34,7 @@ pip install uv
 uv sync
 ```
 
----
+***
 
 ## 运行方式
 
@@ -55,9 +56,40 @@ uv run python etf_score.py
 今天是：【2025-04-21】，应该持仓：【黄金ETF】
 ```
 
+***
+
+### 脚本2 — ETF 收盘价表格（`etf_price_table.py`）
+
+以表格形式展示 ETF 池中各 ETF 最近 M_DAYS 个交易日的收盘价数据，并提供统计信息。
+
+```bash
+uv run python etf_price_table.py
+```
+
+**示例输出：**
+
+```
+================================================================================
+ETF 收盘价表格（最近 25 个交易日）
+================================================================================
+            黄金ETF  纳指100  创业板100  上证180
+date
+2026-03-17  10.64   1.77    3.27   4.06
+2026-03-18  10.61   1.79    3.34   4.06
+...
+
+--------------------------------------------------------------------------------
+统计信息：
+--------------------------------------------------------------------------------
+       黄金ETF  纳指100  创业板100  上证180
+count  25.00  25.00   25.00  25.00
+mean    9.88   1.78    3.36   3.94
+...
+```
+
 ---
 
-### 脚本2 — 动量分值 & 涨跌幅走势图（`etf_momentum_chart.py`）
+### 脚本3 — 动量分值 & 涨跌幅走势图（`etf_momentum_chart.py`）
 
 绘制近一年内 4 只 ETF 的：
 
@@ -72,7 +104,7 @@ uv run python etf_momentum_chart.py
 
 ---
 
-### 脚本3 — 持仓策略可视化（`etf_position_strategy.py`）
+### 脚本4 — 持仓策略可视化（`etf_position_strategy.py`）
 
 绘制近一年内 4 只 ETF 的收盘价走势，并用颜色标记每日应持仓状态：
 
@@ -85,11 +117,11 @@ uv run python etf_position_strategy.py
 
 > ⚠️ 同脚本2，逐日回溯计算，运行时间较长。
 
----
+***
 
 ## 自定义配置
 
-所有共用参数集中在 `config.py`，修改后三个脚本自动生效：
+所有共用参数集中在 `config.py`，修改后四个脚本自动生效：
 
 ```python
 # config.py
@@ -107,13 +139,14 @@ ETF_NAME_MAP = {
 M_DAYS = 25
 ```
 
----
+***
 
 ## 依赖
 
-| 包 | 用途 |
-|----|------|
-| `akshare` | A 股 ETF 历史行情数据 |
-| `numpy` | 数值计算（线性拟合、对数收益率） |
-| `pandas` | 数据处理与表格展示 |
-| `matplotlib` | 图表绘制 |
+| 包            | 用途               |
+| ------------ | ---------------- |
+| `tickflow`   | A 股 ETF 历史行情数据   |
+| `numpy`      | 数值计算（线性拟合、对数收益率） |
+| `pandas`     | 数据处理与表格展示        |
+| `matplotlib` | 图表绘制             |
+
