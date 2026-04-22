@@ -7,6 +7,7 @@ import pandas as pd
 from datetime import datetime, timedelta
 import matplotlib.pyplot as plt
 from matplotlib.ticker import PercentFormatter
+import mpld3
 
 # 设置 matplotlib 中文字体
 plt.rcParams['font.sans-serif'] = ['SimHei', 'Microsoft YaHei']  # 用来正常显示中文标签
@@ -224,5 +225,7 @@ if __name__ == "__main__":
 
     # 调整布局
     plt.tight_layout(rect=[0, 0, 1, 0.96])
-    # 显示图表
-    plt.show()
+    # 输出为可交互 HTML
+    output_path = "etf_momentum_chart.html"
+    mpld3.save_html(plt.gcf(), output_path)
+    print(f"图表已保存为 {output_path}，用浏览器打开即可交互查看")

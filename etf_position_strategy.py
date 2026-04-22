@@ -8,6 +8,7 @@ from datetime import datetime, timedelta
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 from matplotlib.collections import LineCollection
+import mpld3
 
 # 设置 matplotlib 中文字体
 plt.rcParams['font.sans-serif'] = ['SimHei', 'Microsoft YaHei']  # 用来正常显示中文标签
@@ -234,5 +235,7 @@ if __name__ == "__main__":
         ha="center", fontsize=10, style="italic",
     )
 
-    # 显示图表
-    plt.show()
+    # 输出为可交互 HTML
+    output_path = "etf_position_strategy.html"
+    mpld3.save_html(fig, output_path)
+    print(f"图表已保存为 {output_path}，用浏览器打开即可交互查看")

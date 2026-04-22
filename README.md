@@ -16,6 +16,7 @@ astock-etf-kanban/
 ├── etf_price_table.py        # 脚本2：ETF 收盘价表格展示
 ├── etf_momentum_chart.py     # 脚本3：动量分值折线图 + 涨跌幅走势分析
 ├── etf_position_strategy.py   # 脚本4：持仓策略可视化（红/紫色线段）
+├── etf_dashboard.py          # 脚本5：每日 HTML 看板生成器（整合脚本1/3/4）
 ├── pyproject.toml            # 项目依赖声明（uv 管理）
 └── .python-version           # Python 版本锁定（3.11）
 ```
@@ -115,7 +116,26 @@ uv run python etf_momentum_chart.py
 uv run python etf_position_strategy.py
 ```
 
-> ⚠️ 同脚本2，逐日回溯计算，运行时间较长。
+> ⚠️ 同脚本3，逐日回溯计算，运行时间较长。
+
+---
+
+### 脚本5 — 每日轮动看板生成器（`etf_dashboard.py`）
+
+生成集成式 HTML 看板，包含：
+
+- 📋 **今日持仓建议**（脚本1）：当前评分排行表 + 推荐持仓
+- 📈 **动量分值折线图**（脚本3）：近一年动量评分走势
+- 📊 **ETF 涨跌幅走势**（脚本3）：每日 & 累计涨跌幅分析
+- 🎯 **持仓策略可视化**（脚本4）：红/紫线段标记策略执行
+
+```bash
+uv run python etf_dashboard.py
+```
+
+运行后会生成 `etf_dashboard.html` 文件，可使用浏览器打开查看完整看板。
+
+> 💡 图表使用 `mpld3` 生成交互式 HTML，支持缩放、悬停查看数据点等功能。
 
 ***
 
@@ -149,4 +169,5 @@ M_DAYS = 25
 | `numpy`      | 数值计算（线性拟合、对数收益率） |
 | `pandas`     | 数据处理与表格展示        |
 | `matplotlib` | 图表绘制             |
+| `mpld3`      | 将 matplotlib 图表转为交互式 HTML |
 
