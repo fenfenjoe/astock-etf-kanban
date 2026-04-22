@@ -9,7 +9,7 @@
 ## 项目结构
 
 ```
-astock-etf-kanban/
+etfDashBoard/
 ├── config.py                 # 共用配置：ETF 池、名称映射、算法参数
 ├── etf_utils.py              # 共用工具：TickFlow 数据获取函数
 ├── etf_score.py              # 脚本1：计算当前动量评分，输出今日持仓建议
